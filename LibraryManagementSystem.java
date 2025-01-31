@@ -127,8 +127,7 @@ public class LibraryManagementSystem {
         // Add some initial books
         library.addBook(new Book(1, "The Lord of the Rings", "J.R.R. Tolkien"));
         library.addBook(new Book(2, "Pride and Prejudice", "Jane Austen"));
-        library.addBook(new Book(3, "1984", "George Orwell"));
-        library.addBook(new Book(4, "To Kill a Mockingbird", "Harper Lee"));
+    
 
         // Create a student
         System.out.print("Enter Student Name: ");
