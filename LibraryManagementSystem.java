@@ -1,0 +1,129 @@
+// Library Management Programming
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Book {
+    int bookId;
+    String title;
+    String author;
+    boolean isAvailable;
+
+    public Book(int bookId, String title, String author) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.isAvailable = true;
+    }
+
+    public void displayBookInfo() {
+        System.out.println("Book ID: " + bookId);
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Availability: " + (isAvailable ? "Available" : "Borrowed"));
+    }
+
+    public void borrowBook() {
+        isAvailable = false;
+    }
+
+    public void returnBook() {
+        isAvailable = true;
+    }
+}
+
+class Library {
+    ArrayList<Book> books;
+
+    public Library() {
+        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        System.out.println("Book added successfully.");
+    }
+
+    public void removeBook(int bookId) {
+        books.removeIf(book -> book.bookId == bookId);
+        System.out.println("Book removed successfully.");
+    }
+
+    public void listAvailableBooks() {
+        System.out.println("Available Books:");
+        for (Book book : books) {
+            if (book.isAvailable) {
+                book.displayBookInfo();
+                System.out.println("--------------------");
+            }
+        }
+    }
+
+    public Book findBook(String title) {
+        for (Book book : books) {
+            if (book.title.equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+}
+
+class Student {
+    int studentId;
+    String name;
+    ArrayList<Book> borrowedBooks;
+
+    public Student(int studentId, String name) {
+        this.studentId = studentId;
+        this.name = name;
+        this.borrowedBooks = new ArrayList<>();
+    }
+
+    public void borrowBook(Book book, Library library) {
+        if (borrowedBooks.size() < 3) {
+            if (book != null && book.isAvailable) {
+                book.borrowBook();
+                borrowedBooks.add(book);
+                System.out.println(name + " borrowed " + book.title);
+            } else if (book != null && !book.isAvailable) {
+                System.out.println(book.title + " is currently unavailable.");
+            } else {
+                System.out.println("Book not found.");
+            }
+        } else {
+            System.out.println(name + " has reached the maximum borrowing limit (3 books).");
+        }
+    }
+
+    public void returnBook(Book book, Library library) {
+        if (borrowedBooks.contains(book)) {
+            book.returnBook();
+            borrowedBooks.remove(book);
+            System.out.println(name + " returned " + book.title);
+        } else {
+            System.out.println(name + " did not borrow this book.");
+        }
+    }
+
+    public void displayBorrowedBooks() {
+        System.out.println("Books borrowed by " + name + ":");
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("No books borrowed yet.");
+        } else {
+            for (Book book : borrowedBooks) {
+                book.displayBookInfo();
+                System.out.println("--------------------");
+            }
+        }
+    }
+}
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Library library = new Library();
+
+          
+}
+}
