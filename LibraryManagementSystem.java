@@ -124,16 +124,42 @@ public class LibraryManagementSystem {
         Scanner scanner = new Scanner(System.in);
         Library library = new Library();
 
-        // Add some initial books
-        library.addBook(new Book(1, "The Lord of the Rings", "J.R.R. Tolkien"));
-        library.addBook(new Book(2, "Pride and Prejudice", "Jane Austen"));
-    
+  
+        Book book1 = new Book(1, "The Lord of the Rings", "J.R.R. Tolkien");
+        Book book2 = new Book(2, "Pride and Prejudice", "Jane Austen");
+        Book book3 = new Book(3, "1984", "George Orwell");
+        Book book4 = new Book(4, "To Kill a Mockingbird", "Harper Lee");
 
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        library.addBook(book4);
+            
         // Create a student
         System.out.print("Enter Student Name: ");
         String studentName = scanner.nextLine();
-        Student student = new Student(101, studentName);
+        Student student1 = new Student(101, studentName);
+      
 
+        student1.borrowBook(library.findBook("The Lord of the Rings"), library);
+        student1.borrowBook(library.findBook("Pride and Prejudice"), library);
+        student1.borrowBook(library.findBook("1984"), library);
+        student1.borrowBook(library.findBook("To Kill a Mockingbird"), library); // Tries to borrow a 4th book
+
+        student1.displayBorrowedBooks();
+
+        library.listAvailableBooks();
+
+        student1.returnBook(library.findBook("The Lord of the Rings"), library);
+
+        library.listAvailableBooks(); // The Lord of the Rings should now be available.
+
+        student1.displayBorrowedBooks();
+
+        library.removeBook(2); // Remove Pride and Prejudice
+
+        library.listAvailableBooks(); // Pride and Prejudice should no longer be listed.
     
+        
     }
 }
